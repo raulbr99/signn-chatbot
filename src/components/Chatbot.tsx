@@ -104,7 +104,7 @@ const Chatbot = () => {
         }
     };
 
-    useEffect(() => {
+    /* useEffect(() => {
         // Scroll to the bottom when a new message is added
         if (chatContainerRef.current) {
             const { scrollHeight, scrollTop, clientHeight } = chatContainerRef.current;
@@ -115,7 +115,7 @@ const Chatbot = () => {
                 chatContainerRef.current?.scrollTo(0, chatContainerRef.current.scrollHeight);
             }
         }
-    }, [messages]);
+    }, [messages]); */
 
     return (
         <div className="max-w-4xl w-2/3 mx-auto mt-8 p-4 bg-gray-200 rounded-md">
