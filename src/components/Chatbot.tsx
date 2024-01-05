@@ -117,8 +117,8 @@ const Chatbot = () => {
     }, [messages]); */
 
     return (
-        <div className="max-w-4xl w-2/3 mx-auto mt-8 p-4 bg-gray-200 rounded-md">
-            <div className="overflow-y-scroll max-h-[700px] h-[700px] space-y-2 flex flex-col items-end">
+        <div className="md:max-w-4xl w-full md:w-2/3 mx-auto mt-8 p-4 bg-gray-200 rounded-md">
+            <div className="overflow-y-scroll md:max-h-[700px] min-h-full h- md:h-[700px] space-y-2 flex flex-col items-end">
                 {messages.map((message, index) => (
                     <Message key={index} message={message} />
                 ))}
