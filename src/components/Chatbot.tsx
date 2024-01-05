@@ -10,7 +10,6 @@ const Chatbot = () => {
     const [assistant, setAssistant] = useState<any>(null);
     const [thread, setThread] = useState<any>(null);
     const [openai, setOpenai] = useState<any>(null);
-    const chatContainerRef = useRef(null);
 
     /* const openai = new OpenAI({
         apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -40,7 +39,7 @@ const Chatbot = () => {
         const assistant = await openai.beta.assistants.create({
             name: 'Contract Creation Chatbot',
             instructions: "You are an advanced contract creation chatbot. Your primary role is to guide users through the process of generating personalized contracts tailored to their specific needs. Your objective is to elicit comprehensive information from users by asking one clear and relevant question at a time. Initiate the conversation by inquiring about the type of contract the user requires. Subsequently, proceed with distinct questions covering terms, conditions, parties involved, and any specific clauses desired by the user. Upon receiving all necessary information, your task is to dynamically generate a contract using the specific data provided by the user. Ensure that the contract is formatted correctly and includes all relevant details. Maintain a professional and trustworthy tone throughout the interaction to instill confidence in the accuracy and completeness of the generated contract. Your overarching goal is to streamline the contract creation process, providing a seamless and user-friendly experience for clients. Adjust your queries based on user responses to ensure a coherent and effective dialogue.",
-            model: 'gpt-4-1106-preview',
+            model: 'gpt-3.5-turbo-1106',
         });
 
         // create thread
