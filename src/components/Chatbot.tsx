@@ -11,6 +11,7 @@ const Chatbot = () => {
     const [thread, setThread] = useState<any>(null);
     const [openai, setOpenai] = useState<any>(null);
     const [model, setModel] = useState<any>("gpt-4");
+    const [lastMessageText, setLastMessage] = useState<string>("")
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
     /* const openai = new OpenAI({
@@ -49,10 +50,10 @@ const Chatbot = () => {
             Begin with a polite greeting and ask for the specific type of contract the user needs to create.
             Proceed with a series of concise questions, each designed to collect a piece of information required for the contract, ensuring that each question naturally follows from the user's previous response.
             Maintain a professional and efficient tone throughout the conversation, avoiding any language that suggests the chatbot is unable to generate contracts.
-            Once all necessary information is obtained, confirm with the user that they have provided all the details and are ready to generate the contract.
-            After user confirmation, indicate that the contract will be generated and, if necessary, converted into a PDF format. You must use code interpreter to generate the pdf`,
+            Once all necessary information is obtained, you have to send the exactly message "CONFIRM CONTRACT, just that exactly string in the response, dont use any more word".
+            You have to do the question one by one. 
+            `,
             model: model,
-            tools: [{ type: "code_interpreter" }],
         });
 
         // create thread
@@ -106,7 +107,10 @@ const Chatbot = () => {
 
         if (lastMessage) {
             console.log(lastMessage.content[0]);
-            setMessages([...messages, createNewMessage(lastMessage.content[0]["text"].value, false, lastMessage.content[0].annotations)]);
+            setLastMessage(lastMessage.content[0]["text"].value)
+            //if(!lastMessage.content[0]["text"].value.includes("CONFIRM CONTRACT")) {
+                setMessages([...messages, createNewMessage(lastMessage.content[0]["text"].value, false, lastMessage.content[0].annotations)]);
+            //}
         }
     };
 
@@ -127,13 +131,29 @@ const Chatbot = () => {
         scrollIntoLastMessage();
     }, [messages.length]);
 
+    const createContract = () => {
+        console.log("messages: ", messages)
+    }
+
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full relative">
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2 pb-20">
-                {messages.map((message, index) => (
-                    <Message key={index} message={message} />
-                ))}
+                {messages.map((message, index) => {
+                    // Check if message content is "CONFIRM CONTRACT"
+                    if (message.content.includes("CONFIRM CONTRACT")) {
+                        return null; // Do not render this message
+                    } else {
+                        return <Message key={index} message={message} />; // Render other messages
+                    }
+                })}
             </div>
+
+            {lastMessageText.includes("CONFIRM CONTRACT") && (
+                <button onClick={createContract} className="fixed bottom-20 left-1/2 transform -translate-x-1/2 font-mono text-lg bg-blue-200 border-4 border-blue-400 text-black p-2 rounded-full transition duration-150">
+                    GENERATE CONTRACT
+                </button>
+            )}
+
             <div className="mt-auto">
                 <div className="p-4 bg-white shadow-inner flex-none fixed bottom-0 w-full">
                     <div className="flex flex-row">
