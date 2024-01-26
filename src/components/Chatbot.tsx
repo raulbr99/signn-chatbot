@@ -127,7 +127,6 @@ const Chatbot = () => {
                 lastMessageElement?.scrollIntoView({ behavior: "smooth" });
             }
         };
-
         scrollIntoLastMessage();
     }, [messages.length]);
 
@@ -139,11 +138,10 @@ const Chatbot = () => {
         <div className="flex flex-col h-full relative">
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2 pb-20">
                 {messages.map((message, index) => {
-                    // Check if message content is "CONFIRM CONTRACT"
                     if (message.content.includes("CONFIRM CONTRACT")) {
-                        return null; // Do not render this message
+                        return null;
                     } else {
-                        return <Message key={index} message={message} />; // Render other messages
+                        return <Message key={index} message={message} />;
                     }
                 })}
             </div>
