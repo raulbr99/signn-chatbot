@@ -1,11 +1,9 @@
 export class MessageDto {
-  isUser: boolean;
   content: string;
-  annotations?: Array<any>;
+  role: string;
 
-  constructor(isUser: boolean, content: string, annotations: Array<any>) {
-    this.isUser = isUser;
+  constructor(content: string, role: string) {
+    this.role = role
     this.content = content;
-    this.annotations = annotations;
   }
 }
