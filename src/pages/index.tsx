@@ -25,7 +25,7 @@ const Home: NextPage<HomeProps> = ({ data }) => {
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTemplate(e.target.value);
-    router.push(`/?template=${e.target.value}`);
+    window.location.href = `/?template=${e.target.value}`;
   };
 
   return (

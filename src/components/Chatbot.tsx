@@ -22,7 +22,7 @@ const Chatbot: React.FC<any> = ({ data }) => {
     useEffect(() => {
         setMessages([
             {
-                content: 'Hi, I am SAIA, your artificial intelligence assistant. I am here to help you with your legal needs. What can I help you with today?',
+                content: `Hi, I am SAIA, your artificial intelligence assistant. I am here to help you to complete your ${data.name} contract`,
                 role: "system",
             }
         ])
