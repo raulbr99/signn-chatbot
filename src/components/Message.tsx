@@ -13,12 +13,16 @@ const Message: React.FC<MessageProps> = ({ message, messages, templateId }) => {
     const generateContract = async () => {
         try {
             console.log("id: ", templateId)
+            const token = localStorage.getItem('token');
             const response = await axios.post('http://localhost:8080/template/chat', {
                 messages: messages,
                 templateId: templateId
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}` // Include the token in the Authorization header
+                }
             });
             console.log(response.data);
-            // Handle the response data as needed
         } catch (error) {
             console.error('Error generating contract:', error);
             // Handle error
@@ -27,25 +31,28 @@ const Message: React.FC<MessageProps> = ({ message, messages, templateId }) => {
 
     return (
         message.role !== 'contract' ?
-            <div className={`p-2 ${message.role === "user"
-                ? 'bg-blue-500 text-white rounded-tl-xl rounded-b-xl ml-auto'
-                : 'bg-gray-300 text-gray-700 rounded-tr-xl rounded-b-xl'
-                }  max-w-[90%]`}
+            <div className={`w-full mb-2 flex ${message.role === "user" ? 'justify-end' : 'justify-start'}`}
             >
-                {message.content.split("\n").map((text, index) => (
-                    <React.Fragment key={index}>
-                        {text}
-                        <br />
-                    </React.Fragment>
-                ))}
+                <div className={`inline-block break-words max-w-[90%] font-mono ${message.role === "user"
+                    ? 'bg-[#128c7e] text-white rounded-tl-xl rounded-b-xl'
+                    : 'bg-[#193835] text-white rounded-tr-xl rounded-b-xl'
+                    } p-2`}
+                >
+                    {message.content.split("\n").map((text, index) => (
+                        <span key={index}>
+                            {text}
+                            <br />
+                        </span>
+                    ))}
+                </div>
             </div> :
             <div className="flex justify-center items-center my-4">
-                <button onClick={generateContract} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out active:scale-95">
+                <button onClick={generateContract} className="bg-gradient-to-r from-[#193835] to-[#128c7e] text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out active:scale-95">
                     GENERATE CONTRACT
                 </button>
             </div>
     );
-    
+
 };
 
 export default Message;

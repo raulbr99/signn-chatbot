@@ -142,33 +142,27 @@ const Chatbot: React.FC<any> = ({ data }) => {
 
     return (
         <div className="flex flex-col h-full relative">
-            <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2 pb-20">
+            <div ref={chatContainerRef} className="flex-1 bg-[#ece5dd] overflow-y-auto p-4 space-y-2 pb-20">
                 {messages.map((message, index) => {
                     //console.log(message)
                     return <Message key={index} message={message} messages={messages} templateId={data.id}/>;
                 })}
             </div>
 
-            {/*  {lastMessageText.includes("CONFIRM CONTRACT") && (
-                <button onClick={createContract} className="fixed bottom-20 left-1/2 transform -translate-x-1/2 font-mono text-lg bg-blue-200 border-4 border-blue-400 text-black p-2 rounded-full transition duration-150">
-                    GENERATE CONTRACT
-                </button>
-            )} */}
-
             <div className="mt-auto">
-                <div className="p-4 bg-white shadow-inner flex-none fixed bottom-0 w-full">
+                <div className="p-4 bg-transparent flex-none fixed md:static bottom-0 w-full">
                     <div className="flex flex-row">
                         <input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition duration-150"
+                            className="py-2 px-4 text-white w-full border bg-[#193835] rounded-full focus:outline-none focus:border-[#128c7e] transition duration-150"
                         />
                         <button
                             onClick={handleSendMessage}
                             disabled={isWaiting}
-                            className={`ml-2 p-2 ${isWaiting ? 'bg-blue-300' : 'bg-blue-500'} text-white rounded hover:bg-blue-600 focus:outline-none transition duration-150`}
+                            className={`ml-2 p-2 font-mono ${isWaiting ? 'bg-[#91c5bf]' : 'bg-[#128c7e]'} text-white rounded-full hover:bg-blue-600 focus:outline-none transition duration-150`}
                         >
                             Send
                         </button>

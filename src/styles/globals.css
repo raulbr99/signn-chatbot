@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.message {
+    display: inline-block; /* Allows the div to grow with the content */
+    padding: 8px; /* Example padding, adjust as needed */
+    max-width: 90%; /* Keeps the message within the bounds of the chat window */
+    min-width: 10%; /* Minimum width can prevent very short messages from looking too small */
+    word-wrap: break-word; /* Ensures that text breaks to avoid overflow */
+  }
+  

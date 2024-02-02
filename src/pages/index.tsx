@@ -29,17 +29,17 @@ const Home: NextPage<HomeProps> = ({ data }) => {
   };
 
   return (
-    <main className="flex flex-col items-center w-full h-screen md:p-24">
+    <main className="flex flex-col items-center w-full md:w-[30%] h-screen mx-auto bg-[#193835] text-white">
       <div className='my-2'>
-        <button onClick={createTemplate} className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition-colors">ADD TEMPLATE</button>
+        <button onClick={createTemplate} className="px-4 py-2 bg-[#128c7e] text-white rounded-lg shadow hover:bg-blue-600 transition-colors">ADD TEMPLATE</button>
         <select
           name="templates"
           id="template-select"
           onChange={handleTemplateChange}
           value={template}
-          className="ml-4 appearance-none bg-white border border-gray-300 rounded-lg py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 shadow-md hover:border-gray-400"
+          className="ml-4 appearance-none text-black bg-white border border-gray-300 rounded-lg py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 shadow-md hover:border-gray-400"
         >
-          <option value="">-- Choose a template --</option>
+          <option value=""> -- Choose a template -- </option>
           {templates.map((templateId) => (
             <option key={templateId} value={templateId}>{templateId.replace(/_/g, ' ').toUpperCase()}</option>
           ))}
@@ -54,7 +54,7 @@ const Home: NextPage<HomeProps> = ({ data }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const template = query.template || 'mutual_consent'; // Default to 'mutual_consent' if no template is provided
+  const template = query.template || 'mutual_consent';
   const data = await getTemplateById(template as string);
 
   return {
