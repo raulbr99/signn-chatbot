@@ -41,7 +41,7 @@ const Message: React.FC<MessageProps> = ({ message, messages, templateId }) => {
             </div> :
             <div className="flex justify-center items-center my-4">
                 <button onClick={generateContract} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out active:scale-95">
-                    GENERATE TEMPLATE
+                    GENERATE CONTRACT
                 </button>
             </div>
     );

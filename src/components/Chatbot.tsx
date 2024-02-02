@@ -35,7 +35,7 @@ const Chatbot: React.FC<any> = ({ data }) => {
         });
 
         const editTemplate = `
-        You will have to ask to the user for the data in this text: ${data.content} with the s
+        You will have to ask to the user for the data in this JSON object: ${data.content} with the exactly fields
         You will have to ask the data for this template contract: ${data}
         you should instruct the chatbot to conduct a clear and concise question-and-answer session. Each interaction should consist of one question from the chatbot and one response from the user. Here are the instructions for the chatbot:
         Greet the user and tell the user that we are going to edit the template ${data.name}
